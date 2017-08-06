@@ -1,16 +1,25 @@
+﻿import { NgModule, enableProdMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpModule } from '@angular/http';
+import { GridModule, ExcelModule, PDFModule } from '@progress/kendo-angular-grid';
 
 import { AppComponent } from './app.component';
+import { KendoGridComponent } from './kendo-grid/kendo-grid.component';
+import { CategoriesService } from './kendo-grid/kendo-grid.service';
 
 @NgModule({
+  
   declarations: [
-    AppComponent
+    AppComponent,
+    KendoGridComponent
   ],
   imports: [
-    BrowserModule
+      BrowserModule, BrowserAnimationsModule, GridModule, HttpModule, ExcelModule, PDFModule
   ],
-  providers: [],
+  providers: [CategoriesService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}
