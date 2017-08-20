@@ -1,17 +1,19 @@
-﻿import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { CategoriesService } from './kendo-grid.service';
 import { process } from '@progress/kendo-data-query';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
 import { State } from '@progress/kendo-data-query';
 import {
+    GridComponent,
     GridDataResult,
     DataStateChangeEvent
 } from '@progress/kendo-angular-grid';
 @Component({
   selector: 'app-kendo-grid',
   styleUrls: ['./kendo-grid.component.scss'],
-   template: `
+  template: `
+
        <kendo-grid
           [data]="view | async"
           [pageSize]="state.take"
@@ -28,7 +30,14 @@ import {
             </ng-template>
         <kendo-grid-column field="value" title="S.No" width="100"></kendo-grid-column>
         <kendo-grid-column field="text" title="Technology" width="200"></kendo-grid-column>
-    <kendo-grid-excel fileName="Technology.xlsx" ></kendo-grid-excel>
+    <kendo-grid-excel fileName="Technology.xlsx" >
+
+                <kendo-excelexport-column field="value" title="S.No">
+                </kendo-excelexport-column>
+                <kendo-excelexport-column field="text" title="Technology List">
+                </kendo-excelexport-column>
+
+</kendo-grid-excel>
       <kendo-grid-pdf fileName="Technology.pdf" [allPages]="true" paperSize="A4" [repeatHeaders]="true" [landscape]="true">
                 <kendo-grid-pdf-margin top="2cm" left="1cm" right="1cm" bottom="2cm"></kendo-grid-pdf-margin>
                 <ng-template kendoGridPDFTemplate let-pageNum="pageNum" let-totalPages="totalPages">
@@ -61,6 +70,8 @@ export class KendoGridComponent {
         this.state = state;
         this.service.query(state);
     }
+
+   
 
 
 }
